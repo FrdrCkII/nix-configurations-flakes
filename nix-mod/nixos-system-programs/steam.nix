@@ -1,4 +1,4 @@
-{ config, lib, pkgs, cfg, ... }:
+{ config, lib, pkgs, ... }:
 {
   # https://wiki.archlinuxcn.org/wiki/Steam
   # https://wiki.nixos.org/wiki/Steam

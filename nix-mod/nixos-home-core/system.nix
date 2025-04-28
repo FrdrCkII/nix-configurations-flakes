@@ -1,4 +1,4 @@
-{ lib, pkgs, cfg, ... }:
+{ pkgs, cfg, ... }:
 {
   programs.home-manager.enable = true;
   home = {

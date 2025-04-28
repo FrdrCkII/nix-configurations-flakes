@@ -1,5 +1,4 @@
 { custom-args, custom-config }: let
-  inherit (custom-args) inputs;
   inherit (custom-args.inputs) home-manager;
   extraSpecialArgs = {
     inherit (custom-args) inputs;

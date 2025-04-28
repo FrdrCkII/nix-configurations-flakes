@@ -1,4 +1,4 @@
-{ lib, pkgs, cfg, ... }:
+{ pkgs, cfg, ... }:
 {
   environment.systemPackages = with pkgs; [ helix wget curl ]
     ++ cfg.opt.system.packages;

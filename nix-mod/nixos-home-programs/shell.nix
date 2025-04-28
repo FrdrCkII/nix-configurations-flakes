@@ -52,7 +52,7 @@
     };
     bash = {
       shellAliases = {
-        zed = "'zeditor'";
+        zed = "zeditor";
       };
       bashrcExtra = ''
         eval "$(starship init bash)"
@@ -63,6 +63,9 @@
       enableCompletion = true;
       enableVteIntegration = true;
       dotDir = ".config/zsh";
+      shellAliases = {
+        zed = "zeditor";
+      };
       plugins = [
         {
           name = "zsh-zim";

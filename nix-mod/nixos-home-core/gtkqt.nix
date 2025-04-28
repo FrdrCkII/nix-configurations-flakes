@@ -2,9 +2,9 @@
 {
   gtk = {
     enable = true;
-    theme.name = "breeze-dark";
+    theme.name = "Breeze-Dark";
     theme.package = pkgs.kdePackages.breeze-gtk;
-    iconTheme.name = "breeze-dark";
+    iconTheme.name = "Breeze-Dark";
     iconTheme.package = pkgs.kdePackages.breeze-gtk;
     cursorTheme.name = "breeze";
     cursorTheme.package = pkgs.kdePackages.breeze-gtk;

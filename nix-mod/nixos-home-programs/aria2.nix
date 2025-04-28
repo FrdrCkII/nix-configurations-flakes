@@ -1,4 +1,4 @@
-{ config, pkgs, cfg, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [ ariang ];
   programs.aria2 = {
