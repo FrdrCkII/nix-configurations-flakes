@@ -3,6 +3,12 @@ cl:
     @doas nix-collect-garbage --delete-old
     @nix-collect-garbage --delete-old
 
+up:
+    @nix flake update
+    @git add flake.lock
+
 nbd host="nixos":
     @git add *
-    @doas nixos-rebuild switch --flake .#{{host}} --impure
+    @doas rm -rf /etc/nixos/*
+    @doas cp -r  ./* /etc/nixos/
+    @doas nixos-rebuild switch --flake /etc/nixos#{{host}} --impure

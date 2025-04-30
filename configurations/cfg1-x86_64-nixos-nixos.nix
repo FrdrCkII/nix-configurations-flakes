@@ -55,6 +55,8 @@ rec {
 
       "nix-mod/nixos-system-core/boot.nix"
       "nix-mod/nixos-system-core/drivers.nix"
+      "nix-mod/nixos-system-core/greetd.nix"
+      "nix-mod/nixos-system-core/kmscon.nix"
       "nix-mod/nixos-system-core/locale.nix"
       "nix-mod/nixos-system-core/nix-ld.nix"
       "nix-mod/nixos-system-core/nixpkgs.nix"
@@ -77,9 +79,12 @@ rec {
       "nix-mod/nixos-home-programs/gnome-keyring.nix"
       "nix-mod/nixos-home-programs/aria2.nix"
       "nix-mod/nixos-home-programs/fastfetch.nix"
+      "nix-mod/nixos-home-programs/helix.nix"
       "nix-mod/nixos-home-programs/rustup.nix"
+      "nix-mod/nixos-home-programs/yazi.nix"
       "nix-mod/nixos-home-programs/zed.nix"
 
+      "nix-mod/nixos-home-desktop/lxqt.nix"
       "nix-mod/nixos-home-desktop/niri.nix"
     ];
   };

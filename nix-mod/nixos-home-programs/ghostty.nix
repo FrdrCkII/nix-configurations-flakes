@@ -3,7 +3,7 @@
   programs.ghostty = {
     enable = true;
     package = pkgs.ghostty;
-    enableZshIntegration = true;
+    enableZshIntegration = false;
     clearDefaultKeybinds = false;
     settings = {
       background = "#323232";

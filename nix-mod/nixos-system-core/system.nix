@@ -1,4 +1,4 @@
-{ pkgs, cfg, ... }:
+{ lib, pkgs, cfg, ... }:
 {
   environment.systemPackages = with pkgs; [ helix wget curl ]
     ++ cfg.opt.system.packages;
@@ -21,7 +21,7 @@
   system.stateVersion = if (cfg.opt.system.version != null) then cfg.opt.system.version else "25.05";
   system.autoUpgrade.channel = if (cfg.opt.system.channel != null) then cfg.opt.system.channel else null;
   boot.kernelPackages = if (cfg.opt.system.kernel != null) then cfg.opt.system.kernel else pkgs.linuxPackages_latest;
-  services.displayManager.ly.enable = true;
+  services.displayManager.ly.enable = lib.mkDefault true;
   services.xserver.enable = true;
   programs.xwayland.enable = true;
   programs.dconf.enable = true;

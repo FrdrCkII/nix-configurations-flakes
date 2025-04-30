@@ -2,19 +2,14 @@
 {
   home.packages = with pkgs; [
     fuzzel
-    waybar
     pwvucontrol
   ];
   xdg.configFile."fuzzel" = {
     source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/fuzzel";
     recursive = true;
   };
-  xdg.configFile."waybar" = {
-    source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/waybar";
-    recursive = true;
-  };
-  xdg.configFile."niri" = {
-    source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/niri";
+  xdg.configFile."lxqt/wayland" = {
+    source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/lxqt";
     recursive = true;
   };
 }

@@ -3,6 +3,13 @@
   # https://wiki.archlinuxcn.org/wiki/Steam
   # https://wiki.nixos.org/wiki/Steam
   hardware.steam-hardware.enable = true;
+  # https://wiki.archlinuxcn.org/wiki/MangoHud
+  environment.systemPackages = with pkgs; [
+    gamescope
+    gamemode
+    mangohud
+    mangojuice
+  ];
   programs = {
     # https://wiki.archlinuxcn.org/wiki/Gamescope
     gamescope = {
@@ -49,7 +56,6 @@
       extraPackages = with pkgs; [
         gamescope
         gamemode
-        # https://wiki.archlinuxcn.org/wiki/MangoHud
         mangohud
         mangojuice
       ];

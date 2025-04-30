@@ -236,6 +236,7 @@
     127.0.0.1 github.io #S302
     127.0.0.1 www.github.io #S302
     127.0.0.1 *.github.io #S302
+    127.0.0.1 nix-community.github.io #S302
     127.0.0.1 vercel.app #S302
     127.0.0.1 vercel.com #S302
     127.0.0.1 *.vercel.app #S302
