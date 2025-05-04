@@ -64,6 +64,12 @@ Gentoo wiki https://wiki.gentoo.org/wiki/Main_Page
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # 开发环境
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # 我的NUR软件包
     # github仓库
     FrdrCkII = {

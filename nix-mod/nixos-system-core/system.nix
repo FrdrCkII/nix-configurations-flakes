@@ -28,5 +28,18 @@
   programs.git = {
     enable = true;
     package = pkgs.git;
+    config = {
+      user = {
+        name = cfg.opt.git.name;
+        email = cfg.opt.git.mail;
+      };
+      safe = {
+        directory = [
+          "${cfg.opt.users.user.home}/flake"
+          "${cfg.opt.users.user.home}/.cache/nix"
+          "/etc/nixos"
+        ];
+      };
+    };
   };
 }

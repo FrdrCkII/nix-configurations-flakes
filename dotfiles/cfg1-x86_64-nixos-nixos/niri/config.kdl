@@ -590,9 +590,8 @@ binds {
 
 spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "xwayland-satellite" ":12"
-spawn-at-startup "lxqt-session"
-// spawn-at-startup "swww-daemon"
-// spawn-at-startup "swww" "img" "$XDG_PICTURES_DIR/YaeWallpaper.gif"
+spawn-at-startup "swww-daemon"
+spawn-at-startup "swww" "img" "$XDG_PICTURES_DIR/YaeWallpaper.gif"
 
 environment {
     DISPLAY ":12"

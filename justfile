@@ -9,6 +9,4 @@ up:
 
 nbd host="nixos":
     @git add *
-    @doas rm -rf /etc/nixos/*
-    @doas cp -r  ./* /etc/nixos/
-    @doas nixos-rebuild switch --flake /etc/nixos#{{host}} --impure
+    @doas nixos-rebuild switch --flake .#{{host}} --impure

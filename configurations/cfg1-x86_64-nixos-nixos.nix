@@ -16,6 +16,8 @@ rec {
       "vscode"
       "steam"
       "steam-unwrapped"
+      "p7zip"
+      "p7zip-rar"
       "wechat-uos"
       "dingtalk"
       "qq"
@@ -52,6 +54,7 @@ rec {
     nixos-modules = map custom-lib.relativeToRoot [
       "nix-mod/${system.config}/configuration.nix"
       "nix-mod/${system.config}/hardware-configuration.nix"
+      "nix-mod/${system.config}/btrfs.nix"
 
       "nix-mod/nixos-system-core/boot.nix"
       "nix-mod/nixos-system-core/drivers.nix"
@@ -67,6 +70,8 @@ rec {
 
       "nix-mod/nixos-system-desktop/lxqt.nix"
       "nix-mod/nixos-system-desktop/niri.nix"
+
+      "nix-mod/nixos-system-dev/rust.nix"
     ];
     home-manager-modules = map custom-lib.relativeToRoot [
       "nix-mod/nixos-home-core/gtkqt.nix"
@@ -80,7 +85,6 @@ rec {
       "nix-mod/nixos-home-programs/aria2.nix"
       "nix-mod/nixos-home-programs/fastfetch.nix"
       "nix-mod/nixos-home-programs/helix.nix"
-      "nix-mod/nixos-home-programs/rustup.nix"
       "nix-mod/nixos-home-programs/yazi.nix"
       "nix-mod/nixos-home-programs/zed.nix"
 
@@ -123,11 +127,12 @@ rec {
       kernel = packages.pkgs.linuxPackages_latest;
       packages = with packages.pkgs; [
         toybox
+        btrfs-assistant
         fastfetch
         nix-tree
         nssTools
         just
-        # local.steamcommunity-302
+        btop
         nix-alien.nix-alien
       ];
     };
@@ -138,6 +143,7 @@ rec {
         wechat-uos qq
         libreoffice
         ffmpeg gimp
+        p7zip-rar
         vscode
       ];
     };

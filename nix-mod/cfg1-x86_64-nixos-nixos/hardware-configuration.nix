@@ -16,31 +16,31 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/89097e72-acff-475f-8dcd-1931b8665522";
       fsType = "btrfs";
-      options = [ "subvol=root" ];
+      options = [ "subvol=root" "compress=zstd:5" "noatime" "autodefrag" ];
     };
 
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/89097e72-acff-475f-8dcd-1931b8665522";
       fsType = "btrfs";
-      options = [ "subvol=nixs" ];
+      options = [ "subvol=nixs" "compress=zstd:5" "noatime" "autodefrag" ];
     };
 
   fileSystems."/data" =
     { device = "/dev/disk/by-uuid/89097e72-acff-475f-8dcd-1931b8665522";
       fsType = "btrfs";
-      options = [ "subvol=data" ];
+      options = [ "subvol=data" "compress=zstd:5" "noatime" "autodefrag" ];
     };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/89097e72-acff-475f-8dcd-1931b8665522";
       fsType = "btrfs";
-      options = [ "subvol=boot" ];
+      options = [ "subvol=boot" "compress=zstd:5" "noatime" "autodefrag" ];
     };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/89097e72-acff-475f-8dcd-1931b8665522";
       fsType = "btrfs";
-      options = [ "subvol=home" ];
+      options = [ "subvol=home" "compress=zstd:5" "noatime" "autodefrag" ];
     };
 
   fileSystems."/boot/efi" =

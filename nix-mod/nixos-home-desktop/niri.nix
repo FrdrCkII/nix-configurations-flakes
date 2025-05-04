@@ -4,6 +4,7 @@
     fuzzel
     waybar
     pwvucontrol
+    swww
   ];
   xdg.configFile."fuzzel" = {
     source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/fuzzel";
