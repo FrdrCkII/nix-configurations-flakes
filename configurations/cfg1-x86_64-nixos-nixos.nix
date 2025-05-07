@@ -68,7 +68,7 @@ rec {
       "nix-mod/nixos-system-programs/shell.nix"
       "nix-mod/nixos-system-programs/steam.nix"
 
-      "nix-mod/nixos-system-desktop/lxqt.nix"
+      "nix-mod/nixos-system-desktop/gnome.nix"
       "nix-mod/nixos-system-desktop/niri.nix"
 
       "nix-mod/nixos-system-dev/rust.nix"
@@ -87,9 +87,6 @@ rec {
       "nix-mod/nixos-home-programs/helix.nix"
       "nix-mod/nixos-home-programs/yazi.nix"
       "nix-mod/nixos-home-programs/zed.nix"
-
-      "nix-mod/nixos-home-desktop/lxqt.nix"
-      "nix-mod/nixos-home-desktop/niri.nix"
     ];
   };
 
