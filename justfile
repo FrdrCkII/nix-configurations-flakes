@@ -9,4 +9,6 @@ up:
 
 nbd host="nixos":
     @git add *
+    @doas chown root /home/fdk/.cache/nix/tarball-cache
     @doas nixos-rebuild switch --flake .#{{host}} --impure
+    @doas chown FrdrCkII /home/fdk/.cache/nix/tarball-cache

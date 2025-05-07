@@ -1,7 +1,11 @@
 { lib, pkgs, cfg, ... }:
 {
-  environment.systemPackages = with pkgs; [ helix wget curl ]
-    ++ cfg.opt.system.packages;
+  environment.systemPackages = with pkgs; [
+    helix wget curl
+    gcc clang
+    llvmPackages_latest.bintools
+  ]
+  ++ cfg.opt.system.packages;
   networking.hostName = cfg.sys.host;
   networking.networkmanager.enable = true;
   users.users = {
