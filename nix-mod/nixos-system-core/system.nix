@@ -27,6 +27,7 @@
   boot.kernelPackages = if (cfg.opt.system.kernel != null) then cfg.opt.system.kernel else pkgs.linuxPackages_latest;
   services.displayManager.ly.enable = lib.mkDefault true;
   services.xserver.enable = true;
+  services.xserver.desktopManager.xterm.enable = false;
   programs.xwayland.enable = true;
   programs.dconf.enable = true;
   programs.git = {

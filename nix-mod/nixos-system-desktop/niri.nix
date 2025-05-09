@@ -9,11 +9,16 @@
     home.packages = with pkgs; [
       fuzzel
       waybar
+      swaylock
       pwvucontrol
       swww
     ];
     xdg.configFile."niri" = {
       source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/niri";
+      recursive = true;
+    };
+    xdg.configFile."waybar" = {
+      source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/waybar";
       recursive = true;
     };
     xdg.configFile."fuzzel" = {

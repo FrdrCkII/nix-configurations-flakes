@@ -10,6 +10,7 @@ lib.mkMerge [
     # PipWire
     # https://wiki.nixos.org/wiki/PipeWire
     # https://wiki.archlinuxcn.org/wiki/PipeWire
+    environment.systemPackages = with pkgs; [ pulseaudio ];
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
