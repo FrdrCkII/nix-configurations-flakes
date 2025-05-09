@@ -12,6 +12,10 @@
       pwvucontrol
       swww
     ];
+    xdg.configFile."niri" = {
+      source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/niri";
+      recursive = true;
+    };
     xdg.configFile."fuzzel" = {
       source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/fuzzel";
       recursive = true;

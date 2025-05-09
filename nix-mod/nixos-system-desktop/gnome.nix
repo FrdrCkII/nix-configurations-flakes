@@ -17,18 +17,26 @@
     iagno # go game
     tali # poker game
     totem # video player
+    foot
   ]);
+  environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator ];
+  services.udev.packages = with pkgs; [ gnome-settings-daemon ];
   home-manager.users.${cfg.opt.users.user.name} = {
     home.packages = with pkgs.gnomeExtensions; [
       paperwm
+      kimpanel
+      gamemode-shell-extension
     ];
     dconf = {
       enable = true;
       settings = {
         "org/gnome/shell" = {
           disable-user-extensions = false;
-          enabled-extensions = [
-            "paperwm@paperwm.github.com"
+          enabled-extensions = with pkgs.gnomeExtensions; [
+            paperwm.extensionUuid
+            kimpanel.extensionUuid
+            appindicator.extensionUuid
+            gamemode-shell-extension.extensionUuid
           ];
         };
         "org/gnome/desktop/interface".color-scheme = "prefer-dark";
