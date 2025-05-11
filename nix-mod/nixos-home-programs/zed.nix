@@ -4,13 +4,17 @@
     enable = true;
     package = pkgs.zed-editor;
     extraPackages = with pkgs; [
-      nixd nil
+      nixd
+      nil
+      nixfmt-rfc-style
     ];
-    userSettings = lib.mkDefault {
-      icon_theme = "Zed (Default)";
-      ui_font_size = 16;
-      buffer_font_size = 16;
-      theme = {
+    userSettings = {
+      icon_theme = lib.mkDefault "Zed (Default)";
+      ui_font_size = lib.mkDefault 16;
+      buffer_font_size = lib.mkDefault 16;
+      buffer_font_family = lib.mkForce "";
+      ui_font_family = lib.mkForce "";
+      theme = lib.mkDefault {
         mode = "system";
         light = "Ayu Dark";
         dark = "One Dark";
@@ -21,34 +25,31 @@
             ignore_system_version = false;
           };
         };
-        nixd = {
-          settings = {
-            diagnostic = {
-              suppress = ["sema-extra-with"];
-            };
-          };
-          initialization_options = {
-            formatting = {
-              command = ["nixfmt"];
-            };
-          };
-        };
         nil = {
           settings = {
             diagnostics = {
-              ignored = ["unused_binding"];
+              ignored = [ "unused_binding" ];
             };
           };
-          initialization_options = {
-            formatting = {
-              command = ["nixfmt"];
+          nix = {
+            flake = {
+              autoArchive = true;
+              autoEvalInputs = true;
             };
           };
         };
       };
       languages = {
         Nix = {
-          language_servers = ["nixd" "!nil"];
+          language_servers = [
+            "!nixd"
+            "nil"
+          ];
+          formatter = {
+            external = {
+              command = "nixfmt";
+            };
+          };
         };
       };
     };

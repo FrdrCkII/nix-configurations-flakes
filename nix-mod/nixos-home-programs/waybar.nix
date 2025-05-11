@@ -1,8 +1,6 @@
 { lib, pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    pwvucontrol
-  ];
+  home.packages = with pkgs; [ pwvucontrol ];
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
@@ -13,7 +11,12 @@
         height = 0;
         modules-left = [ ];
         modules-center = [ "niri/window" ];
-        modules-right = [ "tray" "pulseaudio" "network" "clock" ];
+        modules-right = [
+          "tray"
+          "pulseaudio"
+          "network"
+          "clock"
+        ];
         "niri/workspaces" = {
           "disable-scroll" = true;
           "all-outputs" = false;
@@ -35,12 +38,15 @@
             "phone-muted" = "";
             "portable" = "";
             "car" = "";
-            "default" = ["" ""];
+            "default" = [
+              ""
+              ""
+            ];
           };
           "scroll-step" = 5;
           "on-click" = "pwvucontrol";
           "on-click-right" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-          "ignored-sinks" = ["Easy Effects Sink"];
+          "ignored-sinks" = [ "Easy Effects Sink" ];
         };
         "network" = {
           "format-wifi" = "<span color='#9f9fcf'>[ |{essid}|{signalStrength}%]</span>";

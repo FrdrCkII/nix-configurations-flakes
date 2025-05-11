@@ -1,4 +1,5 @@
-{ custom-args, custom-config }: let
+{ custom-args, custom-config }:
+let
   inherit (custom-args.inputs) system-manager nix-system-graphics;
   extraSpecialArgs = {
     inherit (custom-args) inputs;
@@ -10,8 +11,10 @@
       lib = custom-args.custom-lib;
     };
   };
-in system-manager.lib.makeSystemConfig {
+in
+system-manager.lib.makeSystemConfig {
   inherit extraSpecialArgs;
-  modules = [nix-system-graphics.systemModules.default]
-    ++ extraSpecialArgs.cfg.mod.system-manager-modules;
+  modules = [
+    nix-system-graphics.systemModules.default
+  ] ++ extraSpecialArgs.cfg.mod.system-manager-modules;
 }

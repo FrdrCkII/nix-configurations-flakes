@@ -5,7 +5,13 @@
     username = cfg.opt.users.user.name;
     homeDirectory = cfg.opt.users.user.home;
     stateVersion = cfg.opt.home-manager.version;
-    packages = with pkgs; [ helix wget curl ]
+    packages =
+      with pkgs;
+      [
+        helix
+        wget
+        curl
+      ]
       ++ cfg.opt.home-manager.packages;
   };
   programs.git = {

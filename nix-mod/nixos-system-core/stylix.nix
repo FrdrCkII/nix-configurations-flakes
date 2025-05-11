@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  # https://github.com/danth/stylix
+  # https://stylix.danth.me/
   stylix = {
     enable = true;
     autoEnable = true;
@@ -7,20 +9,20 @@
     polarity = "dark";
     fonts = {
       serif = {
-        package = pkgs.source-han-serif;
-        name = "Source Han Serif CN";
+        name = "Noto Serif CJK SC";
+        package = pkgs.noto-fonts-cjk-serif;
       };
       sansSerif = {
-        package = pkgs.source-han-serif;
-        name = "Source Han Sans CN";
+        name = "Noto Sans CJK SC";
+        package = pkgs.noto-fonts-cjk-sans;
       };
       monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font";
+        package = pkgs.nerd-fonts.jetbrains-mono;
       };
       emoji = {
-        package = pkgs.noto-fonts-emoji;
         name = "Noto Color Emoji";
+        package = pkgs.noto-fonts-emoji;
       };
     };
   };

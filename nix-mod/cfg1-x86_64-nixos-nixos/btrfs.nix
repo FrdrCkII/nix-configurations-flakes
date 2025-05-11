@@ -7,9 +7,12 @@
       verbosity = "crit";
       workDir = "bees";
       extraOptions = [
-        "--thread-count" "6"
-        "--loadavg-target" "6"
-        "--thread-min" "1"
+        "--thread-count"
+        "6"
+        "--loadavg-target"
+        "6"
+        "--thread-min"
+        "1"
       ];
     };
   };

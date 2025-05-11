@@ -1,18 +1,18 @@
 /*
-官方手册 https://nixos.org/manual/nixos/unstable/
-官方wiki https://wiki.nixos.org/wiki/NixOS_Wiki/zh-cn
-官方中文网站 https://nixos-cn.org/
-选项&软件包查询 https://search.nixos.org/options?
-NUR软件包查询 https://nur.nix-community.org/
-home-manager选项查询 https://home-manager-options.extranix.com/?query=&release=master
-中文社区github https://github.com/nixos-cn
-社区大佬的配置文件 https://github.com/NixOS-CN/NixOS-CN-telegram
-中文教程 https://nixos-and-flakes.thiscute.world/zh/
-上文作者的配置文件 https://github.com/ryan4yin/nix-config
-视频教程 https://www.bilibili.com/video/BV1yxzkYYE3E/
-视频作者的配置文件 https://github.com/novel2430/MyNix
-Arch wiki https://wiki.archlinuxcn.org/wiki/首页
-Gentoo wiki https://wiki.gentoo.org/wiki/Main_Page
+  官方手册 https://nixos.org/manual/nixos/unstable/
+  官方wiki https://wiki.nixos.org/wiki/NixOS_Wiki/zh-cn
+  官方中文网站 https://nixos-cn.org/
+  选项&软件包查询 https://search.nixos.org/options?
+  NUR软件包查询 https://nur.nix-community.org/
+  home-manager选项查询 https://home-manager-options.extranix.com/?query=&release=master
+  中文社区github https://github.com/nixos-cn
+  社区大佬的配置文件 https://github.com/NixOS-CN/NixOS-CN-telegram
+  中文教程 https://nixos-and-flakes.thiscute.world/zh/
+  上文作者的配置文件 https://github.com/ryan4yin/nix-config
+  视频教程 https://www.bilibili.com/video/BV1yxzkYYE3E/
+  视频作者的配置文件 https://github.com/novel2430/MyNix
+  Arch wiki https://wiki.archlinuxcn.org/wiki/首页
+  Gentoo wiki https://wiki.gentoo.org/wiki/Main_Page
 */
 {
   description = "FrdrCkII's NixOS and Nix Configurations with Flakes";
@@ -87,21 +87,27 @@ Gentoo wiki https://wiki.gentoo.org/wiki/Main_Page
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
   };
-  outputs = { self, ... }@inputs: let
-    inherit (inputs.nixpkgs) lib;
-    inherit (inputs) haumea;
-    custom-lib = import ./nix-lib {inherit lib;};
-    custom-args = {inherit inputs lib custom-lib;};
-    config = haumea.lib.load {
-      src = ./configurations;
-      inputs = custom-args;
+  outputs =
+    { self, ... }@inputs:
+    let
+      inherit (inputs.nixpkgs) lib;
+      inherit (inputs) haumea;
+      custom-lib = import ./nix-lib { inherit lib; };
+      custom-args = { inherit inputs lib custom-lib; };
+      config = haumea.lib.load {
+        src = ./configurations;
+        inputs = custom-args;
+      };
+    in
+    {
+      nixosConfigurations = lib.attrsets.mergeAttrsList (
+        lib.flatten (map (it: it.nixosConfigurations or { }) (lib.flatten (builtins.attrValues config)))
+      );
+      homeConfigurations = lib.attrsets.mergeAttrsList (
+        lib.flatten (map (it: it.homeConfigurations or { }) (lib.flatten (builtins.attrValues config)))
+      );
+      systemConfigs = lib.attrsets.mergeAttrsList (
+        lib.flatten (map (it: it.systemConfigs or { }) (lib.flatten (builtins.attrValues config)))
+      );
     };
-  in {
-    nixosConfigurations = lib.attrsets.mergeAttrsList
-      (lib.flatten (map (it: it.nixosConfigurations or {}) (lib.flatten (builtins.attrValues config))));
-    homeConfigurations = lib.attrsets.mergeAttrsList
-      (lib.flatten (map (it: it.homeConfigurations or {}) (lib.flatten (builtins.attrValues config))));
-    systemConfigs = lib.attrsets.mergeAttrsList
-      (lib.flatten (map (it: it.systemConfigs or {}) (lib.flatten (builtins.attrValues config))));
-  };
 }

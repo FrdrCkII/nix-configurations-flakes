@@ -20,11 +20,13 @@
     doas = {
       enable = false;
       wheelNeedsPassword = true;
-      extraRules = [{
-        users = [ cfg.opt.users.user.name ];
-        keepEnv = true;
-        persist = true;
-      }];
+      extraRules = [
+        {
+          users = [ cfg.opt.users.user.name ];
+          keepEnv = true;
+          persist = true;
+        }
+      ];
     };
   };
 }

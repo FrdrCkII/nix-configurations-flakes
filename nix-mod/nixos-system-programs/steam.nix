@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # https://wiki.archlinuxcn.org/wiki/Steam
   # https://wiki.nixos.org/wiki/Steam
@@ -39,48 +44,50 @@
           MANGOHUD = true;
           SDL_VIDEODRIVER = "wayland,x11";
         };
-        extraPkgs = pkgs: with pkgs; [
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXinerama
-          xorg.libXScrnSaver
-          xorg.libxcb
-          libpng
-          libpulseaudio
-          libvorbis
-          stdenv.cc.cc.lib
-          libkrb5
-          keyutils
+        extraPkgs =
+          pkgs: with pkgs; [
+            xorg.libXcursor
+            xorg.libXi
+            xorg.libXinerama
+            xorg.libXScrnSaver
+            xorg.libxcb
+            libpng
+            libpulseaudio
+            libvorbis
+            stdenv.cc.cc.lib
+            libkrb5
+            keyutils
 
-          # fix CJK fonts
-          source-sans
-          source-serif
-          source-han-sans
-          source-han-serif
+            # fix CJK fonts
+            source-sans
+            source-serif
+            source-han-sans
+            source-han-serif
 
-          # audio
-          pipewire
+            # audio
+            pipewire
 
-          # other common
-          udev
-          alsa-lib
-          vulkan-loader
-          xorg.libX11
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXrandr # To use the x11 feature
-          libxkbcommon
-          wayland # To use the wayland feature
-        ];
+            # other common
+            udev
+            alsa-lib
+            vulkan-loader
+            xorg.libX11
+            xorg.libXcursor
+            xorg.libXi
+            xorg.libXrandr # To use the x11 feature
+            libxkbcommon
+            wayland # To use the wayland feature
+          ];
       };
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
       extest.enable = true;
-      fontPackages = builtins.filter lib.types.package.check config.fonts.packages
-      ++ (with pkgs; [
-        wqy_zenhei
-      ]);
+      fontPackages =
+        builtins.filter lib.types.package.check config.fonts.packages
+        ++ (with pkgs; [
+          wqy_zenhei
+        ]);
       extraPackages = with pkgs; [
         gamescope
         gamemode

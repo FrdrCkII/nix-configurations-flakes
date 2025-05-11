@@ -1,4 +1,5 @@
-{ custom-args, custom-config }: let
+{ custom-args, custom-config }:
+let
   inherit (custom-args.inputs) home-manager;
   extraSpecialArgs = {
     inherit (custom-args) inputs;
@@ -10,7 +11,8 @@
       lib = custom-args.custom-lib;
     };
   };
-in home-manager.lib.homeManagerConfiguration {
+in
+home-manager.lib.homeManagerConfiguration {
   inherit extraSpecialArgs;
   modules = extraSpecialArgs.cfg.mod.home-manager-modules;
 }

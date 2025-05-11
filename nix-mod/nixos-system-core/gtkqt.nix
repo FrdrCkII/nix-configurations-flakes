@@ -1,4 +1,9 @@
-{ lib, pkgs, cfg, ... }:
+{
+  lib,
+  pkgs,
+  cfg,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     qt6.qtwayland
@@ -7,7 +12,7 @@
   home-manager.users.${cfg.opt.users.user.name} = {
     gtk = {
       enable = true;
-      theme =  {
+      theme = {
         name = lib.mkDefault "Adwaita";
         package = lib.mkDefault pkgs.gnome-themes-extra;
       };
@@ -22,8 +27,7 @@
       };
       gtk2 = {
         configLocation = "${cfg.opt.users.user.home}/.config/gtk-2.0/gtkrc";
-        extraConfig = ''
-        '';
+        extraConfig = '''';
       };
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = true;
@@ -47,10 +51,12 @@
       platformTheme.name = lib.mkDefault "qtct";
       style = {
         name = lib.mkDefault "adwaita-dark";
-        package = with pkgs; lib.mkDefault [
-          adwaita-qt
-          adwaita-qt6
-        ];
+        package =
+          with pkgs;
+          lib.mkDefault [
+            adwaita-qt
+            adwaita-qt6
+          ];
       };
     };
     home.pointerCursor = {

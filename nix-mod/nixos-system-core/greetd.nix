@@ -1,6 +1,13 @@
-{ config, lib, pkgs, ... }: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
   sessionsDir = "${config.services.displayManager.sessionData.desktops}/share";
-in {
+in
+{
   services.displayManager.ly.enable = lib.mkForce false;
   services.xserver.displayManager.startx.enable = true;
   services.greetd = {

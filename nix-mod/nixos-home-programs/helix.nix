@@ -5,7 +5,10 @@
     settings = {
       theme = lib.mkDefault "snazzy";
       editor = {
-        rulers = [72 80];
+        rulers = [
+          72
+          80
+        ];
         cursor-shape = {
           normal = "block";
           insert = "bar";
@@ -13,10 +16,12 @@
         };
       };
     };
-    languages.language = [{
-      name = "nix";
-      auto-format = true;
-      formatter.command = lib.getExe pkgs.nixfmt-rfc-style;
-    }];
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        formatter.command = lib.getExe pkgs.nixfmt-rfc-style;
+      }
+    ];
   };
 }

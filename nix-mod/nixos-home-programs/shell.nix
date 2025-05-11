@@ -1,4 +1,10 @@
-{ config, lib, pkgs, cfg, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  cfg,
+  ...
+}:
 {
   xdg.configFile = {
     "zsh/.zimrc".source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/zimrc";
