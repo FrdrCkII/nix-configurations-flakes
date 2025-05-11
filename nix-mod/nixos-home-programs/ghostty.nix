@@ -1,14 +1,10 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   programs.ghostty = {
     enable = true;
     package = pkgs.ghostty;
-    enableZshIntegration = false;
-    clearDefaultKeybinds = false;
     settings = {
-      background = "#323232";
-      background-opacity = "0.8";
-      background-blur = "true";
+      background = lib.mkDefault "#1d2021";
       window-decoration = "none";
       maximize = "true";
       cursor-style = "underline";

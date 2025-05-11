@@ -14,6 +14,7 @@ rec {
   packages = rec {
     allowed-unfree-packages = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
       "vscode"
+      "microsoft-edge"
       "steam"
       "steam-unwrapped"
       "p7zip"
@@ -59,29 +60,29 @@ rec {
       "nix-mod/nixos-system-core/boot.nix"
       "nix-mod/nixos-system-core/drivers.nix"
       "nix-mod/nixos-system-core/greetd.nix"
-      "nix-mod/nixos-system-core/kmscon.nix"
+      "nix-mod/nixos-system-core/gtkqt.nix"
+      # "nix-mod/nixos-system-core/kmscon.nix"
       "nix-mod/nixos-system-core/locale.nix"
       "nix-mod/nixos-system-core/nix-ld.nix"
       "nix-mod/nixos-system-core/nixpkgs.nix"
+      "nix-mod/nixos-system-core/stylix.nix"
       "nix-mod/nixos-system-core/system.nix"
+      # "nix-mod/nixos-system-core/selinux.nix"
 
       "nix-mod/nixos-system-programs/shell.nix"
       "nix-mod/nixos-system-programs/steam.nix"
 
-      "nix-mod/nixos-system-desktop/gnome.nix"
       "nix-mod/nixos-system-desktop/niri.nix"
 
       "nix-mod/nixos-system-dev/rust.nix"
     ];
     home-manager-modules = map custom-lib.relativeToRoot [
-      "nix-mod/nixos-home-core/gtkqt.nix"
       "nix-mod/nixos-home-core/locale.nix"
       "nix-mod/nixos-home-core/system.nix"
       "nix-mod/nixos-home-core/xdg.nix"
 
       "nix-mod/nixos-home-programs/shell.nix"
       "nix-mod/nixos-home-programs/ghostty.nix"
-      "nix-mod/nixos-home-programs/gnome-keyring.nix"
       "nix-mod/nixos-home-programs/aria2.nix"
       "nix-mod/nixos-home-programs/fastfetch.nix"
       "nix-mod/nixos-home-programs/helix.nix"
@@ -101,7 +102,7 @@ rec {
       };
       root = {
         passwd = "$y$j9T$0DxglU59Q8weU0vHSodfF0$vp7gYB1HTTEcx/6AAXqCESnKH4Z6EUff/cVmg7zPit.";
-        shell = packages.pkgs.zsh;
+        shell = packages.pkgs.bashInteractive;
       };
     };
     git = {
@@ -130,6 +131,7 @@ rec {
         nssTools
         just
         btop
+        lynis
         nix-alien.nix-alien
       ];
     };
@@ -141,6 +143,7 @@ rec {
         libreoffice
         ffmpeg gimp
         p7zip-rar
+        microsoft-edge
         vscode
       ];
     };

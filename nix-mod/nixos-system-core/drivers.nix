@@ -31,15 +31,21 @@ lib.mkMerge [
   ( lib.mkIf (cfg.opt.drivers.amd) {
     # Vulkan
     environment.variables.AMD_VULKAN_ICD = "RADV";
-    hardware.graphics = {
-      extraPackages = with pkgs; [
-        mesa
-        amdvlk
-      ];
-      extraPackages32 = with pkgs; [
-        driversi686Linux.mesa
-        driversi686Linux.amdvlk
-      ];
+    hardware = {
+      graphics = {
+        extraPackages = with pkgs; [
+          mesa
+          amdvlk
+        ];
+        extraPackages32 = with pkgs; [
+          driversi686Linux.mesa
+          driversi686Linux.amdvlk
+        ];
+      };
+      amdgpu.amdvlk = {
+        enable = true;
+        support32Bit.enable = true;
+      };
     };
     boot.initrd.kernelModules = [ "amdgpu" ];
     services.xserver.videoDrivers = [ "amdgpu" ];

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   programs.zed-editor = {
     enable = true;
@@ -6,7 +6,7 @@
     extraPackages = with pkgs; [
       nixd nil
     ];
-    userSettings = {
+    userSettings = lib.mkDefault {
       icon_theme = "Zed (Default)";
       ui_font_size = 16;
       buffer_font_size = 16;

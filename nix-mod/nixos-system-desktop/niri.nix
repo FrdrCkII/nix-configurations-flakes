@@ -6,27 +6,17 @@
     xwayland-satellite
   ];
   home-manager.users.${cfg.opt.users.user.name} = {
+    imports = map cfg.lib.relativeToRoot [
+      "nix-mod/nixos-home-programs/fuzzel.nix"
+      "nix-mod/nixos-home-programs/mako.nix"
+      "nix-mod/nixos-home-programs/swaylock.nix"
+      "nix-mod/nixos-home-programs/waybar.nix"
+    ];
     home.packages = with pkgs; [
-      fuzzel
-      waybar
-      swaylock
-      pwvucontrol
-      swww
+      swaybg
     ];
     xdg.configFile."niri" = {
       source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/niri";
-      recursive = true;
-    };
-    xdg.configFile."waybar" = {
-      source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/waybar";
-      recursive = true;
-    };
-    xdg.configFile."fuzzel" = {
-      source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/fuzzel";
-      recursive = true;
-    };
-    xdg.configFile."lxqt/wayland" = {
-      source = cfg.lib.relativeToRoot "dotfiles/${cfg.sys.config}/lxqt";
       recursive = true;
     };
   };

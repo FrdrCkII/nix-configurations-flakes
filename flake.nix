@@ -63,6 +63,11 @@ Gentoo wiki https://wiki.gentoo.org/wiki/Main_Page
       url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # nix框架
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # 开发环境
     rust-overlay = {

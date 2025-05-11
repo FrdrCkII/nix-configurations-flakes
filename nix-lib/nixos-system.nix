@@ -31,5 +31,6 @@ in nixpkgs.lib.nixosSystem {
       )
     ++ [
       inputs.nix-index-database.nixosModules.nix-index
+      inputs.stylix.nixosModules.stylix
     ];
 }

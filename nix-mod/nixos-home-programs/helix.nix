@@ -3,7 +3,7 @@
   programs.helix = {
     enable = true;
     settings = {
-      theme = "snazzy";
+      theme = lib.mkDefault "snazzy";
       editor = {
         rulers = [72 80];
         cursor-shape = {

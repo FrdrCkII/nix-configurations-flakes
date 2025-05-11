@@ -16,9 +16,8 @@ in {
             --user-menu \
             --remember \
             --remember-session \
-            --sessions ${sessionsDir}/wayland-sessions \
-            --xsessions ${sessionsDir}/xsessions \
-            --cmd  "startlxqtwayland"
+            --sessions ${sessionsDir}/wayland-sessions
+            # --xsessions ${sessionsDir}/xsessions
         '';
         user = "greeter";
       };
