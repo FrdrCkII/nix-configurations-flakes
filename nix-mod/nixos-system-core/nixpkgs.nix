@@ -1,4 +1,9 @@
-{ lib, pkgs, cfg, ... }:
+{
+  lib,
+  pkgs,
+  cfg,
+  ...
+}:
 {
   nixpkgs = {
     overlays = cfg.pkg.overlays;
@@ -10,8 +15,15 @@
   nix = {
     package = pkgs.nix;
     settings = {
+      cores = 0;
+      max-jobs = "auto";
+      sandbox = true;
       auto-optimise-store = true;
       builders-use-substitutes = true;
+      extra-sandbox-paths = [
+        "/dev"
+        "/proc"
+      ];
       experimental-features = [
         "flakes"
         "nix-command"
@@ -32,7 +44,15 @@
         "@wheel"
         cfg.opt.users.user.name
       ];
+      allowed-users = [
+        "root"
+        "@wheel"
+        cfg.opt.users.user.name
+      ];
     };
+    daemonIOSchedClass = "idle";
+    daemonCPUSchedPolicy = "idle";
+    daemonIOSchedPriority = 0;
     gc = lib.mkDefault {
       automatic = true;
       dates = "weekly";

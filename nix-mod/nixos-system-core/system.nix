@@ -13,7 +13,6 @@
       curl
       gcc
       clang
-      perl
       llvmPackages_latest.bintools
     ]
     ++ cfg.opt.system.packages;

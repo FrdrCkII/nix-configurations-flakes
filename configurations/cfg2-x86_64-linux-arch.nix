@@ -1,8 +1,23 @@
-{ inputs, lib, custom-lib }@custom-args:
+{
+  inputs,
+  lib,
+  custom-lib,
+}@custom-args:
 rec {
-  custom-config = {inherit system packages modules options;};
-  homeConfigurations."${system.name}" = custom-lib.linux-home-manager {inherit custom-args custom-config;};
-  systemConfigs."${system.name}" = custom-lib.linux-system-manager {inherit custom-args custom-config;};
+  custom-config = {
+    inherit
+      system
+      packages
+      modules
+      options
+      ;
+  };
+  homeConfigurations."${system.name}" = custom-lib.linux-home-manager {
+    inherit custom-args custom-config;
+  };
+  systemConfigs."${system.name}" = custom-lib.linux-system-manager {
+    inherit custom-args custom-config;
+  };
 
   system = {
     name = "arch";
@@ -13,13 +28,17 @@ rec {
   };
 
   packages = rec {
-    allowed-unfree-packages = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
-      "wechat-uos"
-      "dingtalk"
-      "qq"
-    ];
-    allowed-insecure-packages = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
-    ];
+    allowed-unfree-packages =
+      pkg:
+      builtins.elem (inputs.nixpkgs.lib.getName pkg) [
+        "wechat-uos"
+        "dingtalk"
+        "qq"
+      ];
+    allowed-insecure-packages =
+      pkg:
+      builtins.elem (inputs.nixpkgs.lib.getName pkg) [
+      ];
     overlays = [
       (final: prev: {
         nur = import inputs.nur {
@@ -28,9 +47,9 @@ rec {
           # repoOverrides = { paul = import paul { pkgs = prev; }; };
         };
       })
-      ( final: prev: {
+      (final: prev: {
         FrdrCkII = inputs.FrdrCkII.packages."${prev.system}";
-      } )
+      })
     ];
     pkgs = import inputs.nixpkgs {
       inherit (system) system;
@@ -53,7 +72,10 @@ rec {
         name = "FrdrCkII";
         home = "/home/fdk";
         passwd = "$y$j9T$VEQdKCDwBWdnXHWt/G3A80$fIwaranrlJ8PoFlsQkqv2qf2aYSyrC71Wx7dHziBIH6";
-        groups = [ "wheel" "networkmanager" ];
+        groups = [
+          "wheel"
+          "networkmanager"
+        ];
       };
       root.passwd = "$y$j9T$0DxglU59Q8weU0vHSodfF0$vp7gYB1HTTEcx/6AAXqCESnKH4Z6EUff/cVmg7zPit.";
     };

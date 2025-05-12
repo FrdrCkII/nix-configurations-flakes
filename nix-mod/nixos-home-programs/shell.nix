@@ -74,249 +74,249 @@
           deleted = "x";
         };
         aws = {
-          symbol = "\\[aws\\]";
+          symbol = "\\[aws\\] ";
         };
         azure = {
-          symbol = "\\[az\\]";
+          symbol = "\\[az\\] ";
         };
         buf = {
-          symbol = "\\[buf\\]";
+          symbol = "\\[buf\\] ";
         };
         bun = {
-          symbol = "\\[bun\\]";
+          symbol = "\\[bun\\] ";
         };
         c = {
-          symbol = "\\[C\\]";
+          symbol = "\\[C\\] ";
         };
         cpp = {
-          symbol = "\\[C++\\]";
+          symbol = "\\[C++\\] ";
         };
         cobol = {
-          symbol = "\\[cobol\\]";
+          symbol = "\\[cobol\\] ";
         };
         conda = {
-          symbol = "\\[conda\\]";
+          symbol = "\\[conda\\] ";
         };
         container = {
-          symbol = "\\[container\\]";
+          symbol = "\\[container\\] ";
         };
         crystal = {
-          symbol = "\\[cr\\]";
+          symbol = "\\[cr\\] ";
         };
         cmake = {
-          symbol = "\\[cmake\\]";
+          symbol = "\\[cmake\\] ";
         };
         daml = {
-          symbol = "\\[daml\\]";
+          symbol = "\\[daml\\] ";
         };
         dart = {
-          symbol = "\\[dart\\]";
+          symbol = "\\[dart\\] ";
         };
         deno = {
-          symbol = "\\[deno\\]";
+          symbol = "\\[deno\\] ";
         };
         dotnet = {
-          symbol = "\\[.NET\\]";
+          symbol = "\\[.NET\\] ";
         };
         directory = {
           read_only = " ro";
         };
         docker_context = {
-          symbol = "\\[docker\\]";
+          symbol = "\\[docker\\] ";
         };
         elixir = {
-          symbol = "\\[exs\\]";
+          symbol = "\\[exs\\] ";
         };
         elm = {
-          symbol = "\\[elm\\]";
+          symbol = "\\[elm\\] ";
         };
         fennel = {
-          symbol = "\\[fnl\\]";
+          symbol = "\\[fnl\\] ";
         };
         fossil_branch = {
-          symbol = "\\[fossil\\]";
+          symbol = "\\[fossil\\] ";
         };
         gcloud = {
-          symbol = "\\[gcp\\]";
+          symbol = "\\[gcp\\] ";
         };
         git_branch = {
           symbol = "git ";
         };
         gleam = {
-          symbol = "\\[gleam\\]";
+          symbol = "\\[gleam\\] ";
         };
         golang = {
-          symbol = "\\[go\\]";
+          symbol = "\\[go\\] ";
         };
         gradle = {
-          symbol = "\\[gradle\\]";
+          symbol = "\\[gradle\\] ";
         };
         guix_shell = {
-          symbol = "\\[guix\\]";
+          symbol = "\\[guix\\] ";
         };
         haskell = {
-          symbol = "\\[haskell\\]";
+          symbol = "\\[haskell\\] ";
         };
         helm = {
-          symbol = "\\[helm\\]";
+          symbol = "\\[helm\\] ";
         };
         hg_branch = {
-          symbol = "\\[hg\\]";
+          symbol = "\\[hg\\] ";
         };
         java = {
-          symbol = "\\[java\\]";
+          symbol = "\\[java\\] ";
         };
         julia = {
-          symbol = "\\[jl\\]";
+          symbol = "\\[jl\\] ";
         };
         kotlin = {
-          symbol = "\\[kt\\]";
+          symbol = "\\[kt\\] ";
         };
         lua = {
-          symbol = "\\[lua\\]";
+          symbol = "\\[lua\\] ";
         };
         nodejs = {
-          symbol = "\\[nodejs\\]";
+          symbol = "\\[nodejs\\] ";
         };
         memory_usage = {
-          symbol = "\\[memory\\]";
+          symbol = "\\[memory\\] ";
         };
         meson = {
-          symbol = "\\[meson\\]";
+          symbol = "\\[meson\\] ";
         };
         nats = {
-          symbol = "\\[nats\\]";
+          symbol = "\\[nats\\] ";
         };
         nim = {
-          symbol = "\\[nim\\]";
+          symbol = "\\[nim\\] ";
         };
         nix_shell = {
-          symbol = "\\[nix\\]";
+          symbol = "\\[nix\\] ";
         };
         ocaml = {
-          symbol = "\\[ml\\]";
+          symbol = "\\[ml\\] ";
         };
         opa = {
-          symbol = "\\[opa\\]";
+          symbol = "\\[opa\\] ";
         };
         os.symbols = {
-          AIX = "\\[aix\\]";
-          Alpaquita = "\\[alq\\]";
-          AlmaLinux = "\\[alma\\]";
-          Alpine = "\\[alp\\]";
-          Amazon = "\\[amz\\]";
-          Android = "\\[andr\\]";
-          Arch = "\\[rch\\]";
-          Artix = "\\[atx\\]";
-          Bluefin = "\\[blfn\\]";
-          CachyOS = "\\[cach\\]";
-          CentOS = "\\[cent\\]";
-          Debian = "\\[deb\\]";
-          DragonFly = "\\[dfbsd\\]";
-          Emscripten = "\\[emsc\\]";
-          EndeavourOS = "\\[ndev\\]";
-          Fedora = "\\[fed\\]";
-          FreeBSD = "\\[fbsd\\]";
-          Garuda = "\\[garu\\]";
-          Gentoo = "\\[gent\\]";
-          HardenedBSD = "\\[hbsd\\]";
-          Illumos = "\\[lum\\]";
-          Kali = "\\[kali\\]";
-          Linux = "\\[lnx\\]";
-          Mabox = "\\[mbox\\]";
-          Macos = "\\[mac\\]";
-          Manjaro = "\\[mjo\\]";
-          Mariner = "\\[mrn\\]";
-          MidnightBSD = "\\[mid\\]";
-          Mint = "\\[mint\\]";
-          NetBSD = "\\[nbsd\\]";
-          NixOS = "\\[nix\\]";
-          Nobara = "\\[nbra\\]";
-          OpenBSD = "\\[obsd\\]";
-          OpenCloudOS = "\\[ocos\\]";
-          openEuler = "\\[oeul\\]";
-          openSUSE = "\\[osuse\\]";
-          OracleLinux = "\\[orac\\]";
-          Pop = "\\[pop\\]";
-          Raspbian = "\\[rasp\\]";
-          Redhat = "\\[rhl\\]";
-          RedHatEnterprise = "\\[rhel\\]";
-          RockyLinux = "\\[rky\\]";
-          Redox = "\\[redox\\]";
-          Solus = "\\[sol\\]";
-          SUSE = "\\[suse\\]";
-          Ubuntu = "\\[ubnt\\]";
-          Ultramarine = "\\[ultm\\]";
-          Unknown = "\\[unk\\]";
-          Uos = "\\[uos\\]";
-          Void = "\\[void\\]";
-          Windows = "\\[win\\]";
+          AIX = "\\[aix\\] ";
+          Alpaquita = "\\[alq\\] ";
+          AlmaLinux = "\\[alma\\] ";
+          Alpine = "\\[alp\\] ";
+          Amazon = "\\[amz\\] ";
+          Android = "\\[andr\\] ";
+          Arch = "\\[rch\\] ";
+          Artix = "\\[atx\\] ";
+          Bluefin = "\\[blfn\\] ";
+          CachyOS = "\\[cach\\] ";
+          CentOS = "\\[cent\\] ";
+          Debian = "\\[deb\\] ";
+          DragonFly = "\\[dfbsd\\] ";
+          Emscripten = "\\[emsc\\] ";
+          EndeavourOS = "\\[ndev\\] ";
+          Fedora = "\\[fed\\] ";
+          FreeBSD = "\\[fbsd\\] ";
+          Garuda = "\\[garu\\] ";
+          Gentoo = "\\[gent\\] ";
+          HardenedBSD = "\\[hbsd\\] ";
+          Illumos = "\\[lum\\] ";
+          Kali = "\\[kali\\] ";
+          Linux = "\\[lnx\\] ";
+          Mabox = "\\[mbox\\] ";
+          Macos = "\\[mac\\] ";
+          Manjaro = "\\[mjo\\] ";
+          Mariner = "\\[mrn\\] ";
+          MidnightBSD = "\\[mid\\] ";
+          Mint = "\\[mint\\] ";
+          NetBSD = "\\[nbsd\\] ";
+          NixOS = "\\[nix\\] ";
+          Nobara = "\\[nbra\\] ";
+          OpenBSD = "\\[obsd\\] ";
+          OpenCloudOS = "\\[ocos\\] ";
+          openEuler = "\\[oeul\\] ";
+          openSUSE = "\\[osuse\\] ";
+          OracleLinux = "\\[orac\\] ";
+          Pop = "\\[pop\\] ";
+          Raspbian = "\\[rasp\\] ";
+          Redhat = "\\[rhl\\] ";
+          RedHatEnterprise = "\\[rhel\\] ";
+          RockyLinux = "\\[rky\\] ";
+          Redox = "\\[redox\\] ";
+          Solus = "\\[sol\\] ";
+          SUSE = "\\[suse\\] ";
+          Ubuntu = "\\[ubnt\\] ";
+          Ultramarine = "\\[ultm\\] ";
+          Unknown = "\\[unk\\] ";
+          Uos = "\\[uos\\] ";
+          Void = "\\[void\\] ";
+          Windows = "\\[win\\] ";
         };
         package = {
-          symbol = "\\[pkg\\]";
+          symbol = "\\[pkg\\] ";
         };
         perl = {
-          symbol = "\\[pl\\]";
+          symbol = "\\[pl\\] ";
         };
         php = {
-          symbol = "\\[php\\]";
+          symbol = "\\[php\\] ";
         };
         pijul_channel = {
-          symbol = "\\[pijul\\]";
+          symbol = "\\[pijul\\] ";
         };
         pixi = {
-          symbol = "\\[pixi\\]";
+          symbol = "\\[pixi\\] ";
         };
         pulumi = {
-          symbol = "\\[pulumi\\]";
+          symbol = "\\[pulumi\\] ";
         };
         purescript = {
-          symbol = "\\[purs\\]";
+          symbol = "\\[purs\\] ";
         };
         python = {
-          symbol = "\\[py\\]";
+          symbol = "\\[py\\] ";
         };
         quarto = {
-          symbol = "\\[quarto\\]";
+          symbol = "\\[quarto\\] ";
         };
         raku = {
-          symbol = "\\[raku\\]";
+          symbol = "\\[raku\\] ";
         };
         rlang = {
-          symbol = "\\[r\\]";
+          symbol = "\\[r\\] ";
         };
         ruby = {
-          symbol = "\\[rb\\]";
+          symbol = "\\[rb\\] ";
         };
         rust = {
-          symbol = "\\[rs\\]";
+          symbol = "\\[rs\\] ";
         };
         scala = {
-          symbol = "\\[scala\\]";
+          symbol = "\\[scala\\] ";
         };
         spack = {
-          symbol = "\\[spack\\]";
+          symbol = "\\[spack\\] ";
         };
         solidity = {
-          symbol = "\\[solidity\\]";
+          symbol = "\\[solidity\\] ";
         };
         status = {
-          symbol = "\\[x = {(bold red)\\]";
+          symbol = "\\[x = {(bold red)\\] ";
         };
         sudo = {
-          symbol = "\\[sudo\\]";
+          symbol = "\\[sudo\\] ";
         };
         swift = {
-          symbol = "\\[swift\\]";
+          symbol = "\\[swift\\] ";
         };
         typst = {
-          symbol = "\\[typst\\]";
+          symbol = "\\[typst\\] ";
         };
         terraform = {
-          symbol = "\\[terraform\\]";
+          symbol = "\\[terraform\\] ";
         };
         zig = {
-          symbol = "\\[zig\\]";
+          symbol = "\\[zig\\] ";
         };
       };
     };

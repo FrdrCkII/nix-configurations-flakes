@@ -1,7 +1,20 @@
-{ inputs, lib, custom-lib }@custom-args:
+{
+  inputs,
+  lib,
+  custom-lib,
+}@custom-args:
 rec {
-  custom-config = {inherit system packages modules options;};
-  nixosConfigurations."${system.name}" = custom-lib.nixos-system {inherit custom-args custom-config;};
+  custom-config = {
+    inherit
+      system
+      packages
+      modules
+      options
+      ;
+  };
+  nixosConfigurations."${system.name}" = custom-lib.nixos-system {
+    inherit custom-args custom-config;
+  };
 
   system = {
     name = "nixos";
@@ -12,19 +25,23 @@ rec {
   };
 
   packages = rec {
-    allowed-unfree-packages = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
-      "vscode"
-      "microsoft-edge"
-      "steam"
-      "steam-unwrapped"
-      "p7zip"
-      "p7zip-rar"
-      "wechat-uos"
-      "dingtalk"
-      "qq"
-    ];
-    allowed-insecure-packages = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
-    ];
+    allowed-unfree-packages =
+      pkg:
+      builtins.elem (inputs.nixpkgs.lib.getName pkg) [
+        "vscode"
+        "microsoft-edge"
+        "steam"
+        "steam-unwrapped"
+        "p7zip"
+        "p7zip-rar"
+        "wechat-uos"
+        "dingtalk"
+        "qq"
+      ];
+    allowed-insecure-packages =
+      pkg:
+      builtins.elem (inputs.nixpkgs.lib.getName pkg) [
+      ];
     overlays = [
       (final: prev: {
         nur = import inputs.nur {
@@ -33,15 +50,15 @@ rec {
           # repoOverrides = { paul = import paul { pkgs = prev; }; };
         };
       })
-      ( final: prev: {
+      (final: prev: {
         nix-alien = inputs.nix-alien.packages."${prev.system}";
-      } )
-      ( final: prev: {
+      })
+      (final: prev: {
         FrdrCkII = inputs.FrdrCkII.packages."${prev.system}";
-      } )
-      ( final: prev: {
+      })
+      (final: prev: {
         local = inputs.local.packages."${prev.system}";
-      } )
+      })
     ];
     pkgs = import inputs.nixpkgs {
       inherit (system) system;
@@ -97,7 +114,11 @@ rec {
         name = "FrdrCkII";
         home = "/home/fdk";
         passwd = "$y$j9T$VEQdKCDwBWdnXHWt/G3A80$fIwaranrlJ8PoFlsQkqv2qf2aYSyrC71Wx7dHziBIH6";
-        groups = [ "wheel" "networkmanager" "gamemode" ];
+        groups = [
+          "wheel"
+          "networkmanager"
+          "gamemode"
+        ];
         shell = packages.pkgs.zsh;
       };
       root = {
@@ -133,15 +154,23 @@ rec {
         btop
         lynis
         nix-alien.nix-alien
+        qemu
+        (writeShellScriptBin "qemu-system-x86_64-uefi" ''
+          qemu-system-x86_64 \
+            -bios ${OVMF.fd}/FV/OVMF.fd \
+            "$@"
+        '')
       ];
     };
 
     home-manager = {
       version = "25.05";
       packages = with packages.pkgs; [
-        wechat-uos qq
+        wechat-uos
+        qq
         libreoffice
-        ffmpeg gimp
+        ffmpeg
+        gimp3-with-plugins
         p7zip-rar
         microsoft-edge
         vscode
