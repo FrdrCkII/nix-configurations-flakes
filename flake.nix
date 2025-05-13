@@ -78,14 +78,9 @@
     # 我的NUR软件包
     # github仓库
     FrdrCkII = {
-      url = "github:FrdrCkII/nur";
+      url = ./nix-pkgs;
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # 本地仓库（测试时使用）
-    # local = {
-    #   url = "./nix-nur";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
   outputs =
     { self, ... }@inputs:

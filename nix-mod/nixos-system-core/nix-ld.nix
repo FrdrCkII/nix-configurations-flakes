@@ -3,16 +3,16 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      xorg.libXcursor
-      xorg.libXi
+      stdenv.cc.cc
+      xorg.libX11
+      xorg.libX11.dev
+      xorg.libICE
+      xorg.libSM
       xorg.libXinerama
-      xorg.libXScrnSaver
-      libpng
-      libpulseaudio
-      libvorbis
-      stdenv.cc.cc.lib
-      libkrb5
-      keyutils
+      fontconfig
+      libGL
+      libxkbcommon
+      zlib
       icu
     ];
   };

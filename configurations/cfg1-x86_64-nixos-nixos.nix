@@ -160,6 +160,7 @@ rec {
             -bios ${OVMF.fd}/FV/OVMF.fd \
             "$@"
         '')
+        wineWowPackages.waylandFull
       ];
     };
 
@@ -174,6 +175,7 @@ rec {
         p7zip-rar
         microsoft-edge
         vscode
+        limo
       ];
     };
   };
