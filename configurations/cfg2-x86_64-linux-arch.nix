@@ -1,23 +1,31 @@
 {
-  inputs,
   lib,
+  inputs,
   custom-lib,
 }@custom-args:
 rec {
+  imports = [ "cfg0-none-none-default.nix" ];
+
   custom-config = {
     inherit
       system
       packages
-      modules
-      options
+      system-manager
+      home-manager
       ;
-  };
-  homeConfigurations."${system.name}" = custom-lib.linux-home-manager {
-    inherit custom-args custom-config;
   };
   systemConfigs."${system.name}" = custom-lib.linux-system-manager {
     inherit custom-args custom-config;
   };
+  homeConfigurations."${system.name}" = lib.foldl (
+    acc: user:
+    {
+      "${user.name}" = custom-lib.linux-home-manager {
+        inherit custom-args custom-config user;
+      };
+    }
+    // acc
+  ) { } home-manager;
 
   system = {
     name = "arch";
@@ -44,7 +52,6 @@ rec {
         nur = import inputs.nur {
           pkgs = prev;
           nurpkgs = prev;
-          # repoOverrides = { paul = import paul { pkgs = prev; }; };
         };
       })
       (final: prev: {
@@ -59,51 +66,37 @@ rec {
     };
   };
 
-  modules = {
-    home-manager-modules = map custom-lib.relativeToRoot [
+  system-manager = {
+    packages = with packages.pkgs; [
+      ffmpeg
     ];
-    system-manager-modules = map custom-lib.relativeToRoot [
+    modules = map custom-lib.relativeToRoot [
+      inputs.nix-system-graphics.systemModules.default
     ];
   };
 
-  options = {
-    users = {
-      user = {
-        name = "FrdrCkII";
-        home = "/home/fdk";
-        passwd = "$y$j9T$VEQdKCDwBWdnXHWt/G3A80$fIwaranrlJ8PoFlsQkqv2qf2aYSyrC71Wx7dHziBIH6";
-        groups = [
-          "wheel"
-          "networkmanager"
-        ];
-      };
-      root.passwd = "$y$j9T$0DxglU59Q8weU0vHSodfF0$vp7gYB1HTTEcx/6AAXqCESnKH4Z6EUff/cVmg7zPit.";
-    };
-    git = {
+  home-manager = [
+    {
       name = "FrdrCkII";
-      mail = "c2h5oc2h4@outlook.com";
-    };
-    drivers = {
-      amd = true;
-      nvidia = false;
-      intel = false;
-    };
-
-    system-manager = {
-      packages = with packages.pkgs; [
-        helix
-        fastfetch
-        nix-tree
-        just
+      home = "/home/fdk";
+      passwd = "$y$j9T$VEQdKCDwBWdnXHWt/G3A80$fIwaranrlJ8PoFlsQkqv2qf2aYSyrC71Wx7dHziBIH6";
+      groups = [
+        "wheel"
+        "networkmanager"
+        "gamemode"
       ];
-    };
-
-    home-manager = {
       version = "25.05";
+      shell = packages.pkgs.zsh;
+      git = {
+        name = "FrdrCkII";
+        mail = "c2h5oc2h4@outlook.com";
+      };
       packages = with packages.pkgs; [
         ffmpeg
       ];
-    };
-  };
+      modules = map custom-lib.relativeToRoot [
+      ];
+    }
+  ];
 
 }

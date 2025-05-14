@@ -8,8 +8,8 @@ let
     cfg = {
       sys = custom-config.system;
       pkg = custom-config.packages;
-      mod = custom-config.modules;
-      opt = custom-config.options;
+      nos = custom-config.nixos;
+      hom = custom-config.home-manager;
       lib = custom-args.custom-lib;
     };
   };
@@ -17,20 +17,32 @@ in
 nixpkgs.lib.nixosSystem {
   inherit system specialArgs;
   modules =
-    specialArgs.cfg.mod.nixos-modules
-    ++ (lib.optionals ((lib.lists.length specialArgs.cfg.mod.home-manager-modules) > 0) [
+    specialArgs.cfg.nos.modules
+    ++ (lib.optionals (custom-config.home-manager != null && custom-config.home-manager != [ ]) [
       home-manager.nixosModules.home-manager
       {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.backupFileExtension = "home-manager.backup";
-        home-manager.extraSpecialArgs = specialArgs;
-        home-manager.users."${specialArgs.cfg.opt.users.user.name}".imports =
-          specialArgs.cfg.mod.home-manager-modules;
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          backupFileExtension = "home-manager.backup";
+          extraSpecialArgs = specialArgs;
+          users = lib.foldl (
+            acc: user:
+            {
+              "${user.name}" = {
+                _module.args = { inherit user; };
+                programs.home-manager.enable = true;
+                imports = user.modules;
+                home = {
+                  username = user.name;
+                  homeDirectory = user.home;
+                  stateVersion = user.version;
+                };
+              };
+            }
+            // acc
+          ) { } custom-config.home-manager;
+        };
       }
-    ])
-    ++ [
-      inputs.nix-index-database.nixosModules.nix-index
-      inputs.stylix.nixosModules.stylix
-    ];
+    ]);
 }

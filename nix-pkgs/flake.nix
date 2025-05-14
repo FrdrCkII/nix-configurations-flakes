@@ -9,7 +9,7 @@
     {
       legacyPackages = forAllSystems (
         system:
-        import ./default.nix {
+        import ./pkgs {
           pkgs = import nixpkgs { inherit system; };
         }
       );

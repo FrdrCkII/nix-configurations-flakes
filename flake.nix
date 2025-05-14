@@ -31,12 +31,12 @@
   inputs = {
     # 软件源
     # https://github.com/nixos/nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # 工具
     # https://github.com/nix-community/haumea
     haumea = {
-      url = "github:nix-community/haumea/v0.2.2";
+      url = "github:nix-community/haumea/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # https://github.com/nix-community/home-manager
@@ -46,52 +46,43 @@
     };
     # https://github.com/numtide/system-manager
     system-manager = {
-      url = "github:numtide/system-manager";
+      url = "github:numtide/system-manager/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # https://github.com/soupglasses/nix-system-graphics
     nix-system-graphics = {
-      url = "github:soupglasses/nix-system-graphics";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # 打包工具
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-alien = {
-      url = "github:thiagokokada/nix-alien";
+      url = "github:soupglasses/nix-system-graphics/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # nix框架
+    # https://github.com/danth/stylix
     stylix = {
-      url = "github:danth/stylix";
+      url = "github:danth/stylix/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # 开发环境
+    # https://github.com/oxalica/rust-overlay
     rust-overlay = {
-      url = "github:oxalica/rust-overlay";
+      url = "github:oxalica/rust-overlay/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # 我的NUR软件包
-    # github仓库
     FrdrCkII = {
-      url = ./nix-pkgs;
+      url = "path:nix-pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
     { self, ... }@inputs:
     let
-      inherit (inputs.nixpkgs) lib;
       inherit (inputs) haumea;
+      inherit (inputs.nixpkgs) lib;
       custom-lib = import ./nix-lib { inherit lib; };
-      custom-args = { inherit inputs lib custom-lib; };
       config = haumea.lib.load {
         src = ./configurations;
-        inputs = custom-args;
+        inputs = { inherit inputs lib custom-lib; };
       };
     in
     {

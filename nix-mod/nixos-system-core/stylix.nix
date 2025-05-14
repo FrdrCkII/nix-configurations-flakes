@@ -1,5 +1,23 @@
-{ pkgs, ... }:
 {
+  lib,
+  pkgs,
+  cfg,
+  ...
+}:
+{
+  environment.systemPackages = with pkgs; [
+    qt6.qtwayland
+    qt5.qtwayland
+  ];
+  home-manager.users = lib.foldl (
+    acc: user:
+    {
+      ${user.name}.imports = map cfg.lib.relativeToRoot [
+        "nix-mod/nixos-home-core/gtkqt.nix"
+      ];
+    }
+    // acc
+  ) { } cfg.hom;
   # https://github.com/danth/stylix
   # https://stylix.danth.me/
   stylix = {

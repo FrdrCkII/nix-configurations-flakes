@@ -19,13 +19,15 @@ lib.mkMerge [
         "page_alloc.shuffle=1"
         "vsyscall=none"
       ];
+      loader = {
+        efi.canTouchEfiVariables = true;
+        efi.efiSysMountPoint = lib.mkIf (cfg.nos.boot.efi-mount-point != null) cfg.nos.boot.efi-mount-point;
+      };
     };
   }
 
-  (lib.mkIf (cfg.opt.boot.loader == "grub") {
+  (lib.mkIf (cfg.nos.boot.loader == "grub") {
     boot.loader = {
-      efi.canTouchEfiVariables = true;
-      efi.efiSysMountPoint = lib.mkDefault "/boot/efi";
       grub = {
         enable = true;
         device = lib.mkDefault "nodev";
@@ -44,19 +46,13 @@ lib.mkMerge [
     };
   })
 
-  (lib.mkIf (cfg.opt.boot.loader == "systemd-boot") {
+  (lib.mkIf (cfg.nos.boot.loader == "systemd-boot") {
     boot.loader = {
-      efi.canTouchEfiVariables = true;
-      efi.efiSysMountPoint = lib.mkDefault "/boot/efi";
       systemd-boot = {
         enable = true;
         consoleMode = "keep";
       };
     };
-  })
-
-  (lib.mkIf (cfg.opt.boot.efi-mount-point != null) {
-    boot.loader.efi.efiSysMountPoint = cfg.opt.boot.efi-mount-point;
   })
 
 ]

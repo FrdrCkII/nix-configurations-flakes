@@ -34,7 +34,7 @@ lib.mkMerge [
 
   # https://wiki.nixos.org/wiki/AMD_GPU
   # https://wiki.archlinuxcn.org/wiki/AMDGPU
-  (lib.mkIf (cfg.opt.drivers.amd) {
+  (lib.mkIf cfg.nos.drivers.amd {
     # Vulkan
     environment.variables.AMD_VULKAN_ICD = "RADV";
     hardware = {
@@ -67,21 +67,8 @@ lib.mkMerge [
 
   })
 
-  (lib.mkIf (cfg.opt.drivers.nvidia) {
-    # TODO: need update
-    boot.extraModprobeConfig = ''
-      blacklist nouveau
-      options nouveau modeset=0
-    '';
-    services.xserver.videoDrivers = [ "nvidia" ];
-    hardware.nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      open = false;
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
+  (lib.mkIf cfg.nos.drivers.nvidia {
+    # TODO
   })
 
 ]

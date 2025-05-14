@@ -10,3 +10,7 @@ up:
 nbd host="nixos":
     @git add *
     @sudo nixos-rebuild switch --flake .#{{host}} --impure
+
+ntt host="nixos":
+    @git add *
+    @sudo nixos-rebuild test --flake .#{{host}} --impure

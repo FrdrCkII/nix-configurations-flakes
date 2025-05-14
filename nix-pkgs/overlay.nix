@@ -9,7 +9,7 @@ let
     name = n;
     value = v;
   };
-  nurAttrs = import ./default.nix { pkgs = super; };
+  nurAttrs = import ./pkgs { pkgs = super; };
 
 in
 builtins.listToAttrs (

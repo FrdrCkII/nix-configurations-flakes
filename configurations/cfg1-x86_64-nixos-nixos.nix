@@ -1,15 +1,17 @@
 {
-  inputs,
   lib,
+  inputs,
   custom-lib,
 }@custom-args:
 rec {
+  imports = [ "cfg0-none-none-default.nix" ];
+
   custom-config = {
     inherit
       system
       packages
-      modules
-      options
+      nixos
+      home-manager
       ;
   };
   nixosConfigurations."${system.name}" = custom-lib.nixos-system {
@@ -47,17 +49,10 @@ rec {
         nur = import inputs.nur {
           pkgs = prev;
           nurpkgs = prev;
-          # repoOverrides = { paul = import paul { pkgs = prev; }; };
         };
       })
       (final: prev: {
-        nix-alien = inputs.nix-alien.packages."${prev.system}";
-      })
-      (final: prev: {
         FrdrCkII = inputs.FrdrCkII.packages."${prev.system}";
-      })
-      (final: prev: {
-        local = inputs.local.packages."${prev.system}";
       })
     ];
     pkgs = import inputs.nixpkgs {
@@ -68,116 +63,102 @@ rec {
     };
   };
 
-  modules = {
-    nixos-modules = map custom-lib.relativeToRoot [
-      "nix-mod/${system.config}/configuration.nix"
-      "nix-mod/${system.config}/hardware-configuration.nix"
-      "nix-mod/${system.config}/btrfs.nix"
-
-      "nix-mod/nixos-system-core/boot.nix"
-      "nix-mod/nixos-system-core/drivers.nix"
-      "nix-mod/nixos-system-core/greetd.nix"
-      "nix-mod/nixos-system-core/gtkqt.nix"
-      # "nix-mod/nixos-system-core/kmscon.nix"
-      "nix-mod/nixos-system-core/locale.nix"
-      "nix-mod/nixos-system-core/nix-ld.nix"
-      "nix-mod/nixos-system-core/nixpkgs.nix"
-      "nix-mod/nixos-system-core/stylix.nix"
-      "nix-mod/nixos-system-core/system.nix"
-      # "nix-mod/nixos-system-core/selinux.nix"
-
-      "nix-mod/nixos-system-programs/shell.nix"
-      "nix-mod/nixos-system-programs/steam.nix"
-
-      "nix-mod/nixos-system-desktop/niri.nix"
-
-      "nix-mod/nixos-system-dev/rust.nix"
-    ];
-    home-manager-modules = map custom-lib.relativeToRoot [
-      "nix-mod/nixos-home-core/locale.nix"
-      "nix-mod/nixos-home-core/system.nix"
-      "nix-mod/nixos-home-core/xdg.nix"
-
-      "nix-mod/nixos-home-programs/shell.nix"
-      "nix-mod/nixos-home-programs/ghostty.nix"
-      "nix-mod/nixos-home-programs/aria2.nix"
-      "nix-mod/nixos-home-programs/fastfetch.nix"
-      "nix-mod/nixos-home-programs/helix.nix"
-      "nix-mod/nixos-home-programs/yazi.nix"
-      "nix-mod/nixos-home-programs/zed.nix"
-    ];
-  };
-
-  options = {
-    users = {
-      user = {
-        name = "FrdrCkII";
-        home = "/home/fdk";
-        passwd = "$y$j9T$VEQdKCDwBWdnXHWt/G3A80$fIwaranrlJ8PoFlsQkqv2qf2aYSyrC71Wx7dHziBIH6";
-        groups = [
-          "wheel"
-          "networkmanager"
-          "gamemode"
-        ];
-        shell = packages.pkgs.zsh;
-      };
-      root = {
-        passwd = "$y$j9T$0DxglU59Q8weU0vHSodfF0$vp7gYB1HTTEcx/6AAXqCESnKH4Z6EUff/cVmg7zPit.";
-        shell = packages.pkgs.bashInteractive;
-      };
-    };
-    git = {
-      name = "FrdrCkII";
-      mail = "c2h5oc2h4@outlook.com";
-    };
-    drivers = {
-      amd = true;
-      nvidia = false;
-      intel = false;
-    };
+  nixos = {
+    version = "25.05";
+    channel = "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/nixos-unstable";
+    kernel = packages.pkgs.linuxPackages_latest;
+    passwd = "$y$j9T$0DxglU59Q8weU0vHSodfF0$vp7gYB1HTTEcx/6AAXqCESnKH4Z6EUff/cVmg7zPit.";
+    shell = packages.pkgs.bashInteractive;
+    drivers.amd = true;
     boot = {
       loader = "grub";
       efi-mount-point = "/boot/efi";
     };
+    packages = with packages.pkgs; [
+      toybox
+      btrfs-assistant
+      fastfetch
+      just
+      btop
+      lynis
+      qemu
+      (writeShellScriptBin "qemu-system-x86_64-uefi" ''
+        qemu-system-x86_64 -bios ${OVMF.fd}/FV/OVMF.fd "$@"
+      '')
+      wineWowPackages.waylandFull
+    ];
+    modules =
+      map custom-lib.relativeToRoot [
+        "nix-mod/${system.config}/configuration.nix"
+        "nix-mod/${system.config}/hardware-configuration.nix"
+        "nix-mod/${system.config}/btrfs.nix"
 
-    system = {
-      version = "25.05";
-      channel = "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/nixos-unstable";
-      kernel = packages.pkgs.linuxPackages_latest;
-      packages = with packages.pkgs; [
-        toybox
-        btrfs-assistant
-        fastfetch
-        nix-tree
-        nssTools
-        just
-        btop
-        lynis
-        nix-alien.nix-alien
-        qemu
-        (writeShellScriptBin "qemu-system-x86_64-uefi" ''
-          qemu-system-x86_64 \
-            -bios ${OVMF.fd}/FV/OVMF.fd \
-            "$@"
-        '')
-        wineWowPackages.waylandFull
+        "nix-mod/nixos-system-core/boot.nix"
+        "nix-mod/nixos-system-core/drivers.nix"
+        "nix-mod/nixos-system-core/greetd.nix"
+        "nix-mod/nixos-system-core/locale.nix"
+        "nix-mod/nixos-system-core/nix-ld.nix"
+        "nix-mod/nixos-system-core/nixpkgs.nix"
+        "nix-mod/nixos-system-core/stylix.nix"
+        "nix-mod/nixos-system-core/security.nix"
+        "nix-mod/nixos-system-core/system.nix"
+        "nix-mod/nixos-system-core/users.nix"
+        # "nix-mod/nixos-system-core/selinux.nix"
+
+        "nix-mod/nixos-system-programs/shell.nix"
+        "nix-mod/nixos-system-programs/steam.nix"
+
+        "nix-mod/nixos-system-desktop/niri.nix"
+
+        "nix-mod/nixos-system-dev/rust.nix"
+      ]
+      ++ [ inputs.stylix.nixosModules.stylix ];
+  };
+
+  home-manager = [
+    {
+      name = "FrdrCkII";
+      home = "/home/fdk";
+      passwd = "$y$j9T$VEQdKCDwBWdnXHWt/G3A80$fIwaranrlJ8PoFlsQkqv2qf2aYSyrC71Wx7dHziBIH6";
+      groups = [
+        "wheel"
+        "nixwheel"
+        "networkmanager"
+        "gamemode"
       ];
-    };
-
-    home-manager = {
       version = "25.05";
+      shell = packages.pkgs.zsh;
+      git = {
+        name = "FrdrCkII";
+        mail = "c2h5oc2h4@outlook.com";
+      };
       packages = with packages.pkgs; [
-        wechat-uos
         qq
-        libreoffice
+        wechat-uos
         ffmpeg
-        gimp3-with-plugins
+        nssTools
         p7zip-rar
+        libreoffice
+        gimp3-with-plugins
         microsoft-edge
         vscode
         limo
       ];
-    };
-  };
+      modules = map custom-lib.relativeToRoot [
+        "nix-mod/nixos-home-core/gtkqt.nix"
+        "nix-mod/nixos-home-core/locale.nix"
+        "nix-mod/nixos-home-core/system.nix"
+        "nix-mod/nixos-home-core/xdg.nix"
+
+        "nix-mod/nixos-home-programs/shell.nix"
+        "nix-mod/nixos-home-programs/ghostty.nix"
+        "nix-mod/nixos-home-programs/aria2.nix"
+        "nix-mod/nixos-home-programs/fastfetch.nix"
+        "nix-mod/nixos-home-programs/helix.nix"
+        "nix-mod/nixos-home-programs/yazi.nix"
+        "nix-mod/nixos-home-programs/zed.nix"
+      ];
+    }
+  ];
 
 }

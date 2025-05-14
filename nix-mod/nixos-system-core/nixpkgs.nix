@@ -6,10 +6,14 @@
 }:
 {
   nixpkgs = {
-    overlays = cfg.pkg.overlays;
+    overlays = lib.mkIf (cfg.pkg.overlays != null) cfg.pkg.overlays;
     config = {
-      allowUnfreePredicate = cfg.pkg.allowed-unfree-packages;
-      permittedInsecurePackages = cfg.pkg.allowed-insecure-packages;
+      allowUnfreePredicate = lib.mkIf (
+        cfg.pkg.allowed-unfree-packages != null
+      ) cfg.pkg.allowed-unfree-packages;
+      permittedInsecurePackages = lib.mkIf (
+        cfg.pkg.allowed-insecure-packages != null
+      ) cfg.pkg.allowed-insecure-packages;
     };
   };
   nix = {
@@ -41,13 +45,13 @@
       ];
       trusted-users = [
         "root"
-        "@wheel"
-        cfg.opt.users.user.name
+        "@root"
+        "@nixwheel"
       ];
       allowed-users = [
         "root"
-        "@wheel"
-        cfg.opt.users.user.name
+        "@root"
+        "@nixwheel"
       ];
     };
     daemonIOSchedClass = "idle";

@@ -1,22 +1,17 @@
-{ pkgs, cfg, ... }:
+{ pkgs, user, ... }:
 {
-  programs.home-manager.enable = true;
-  home = {
-    username = cfg.opt.users.user.name;
-    homeDirectory = cfg.opt.users.user.home;
-    stateVersion = cfg.opt.home-manager.version;
-    packages =
-      with pkgs;
-      [
-        helix
-        wget
-        curl
-      ]
-      ++ cfg.opt.home-manager.packages;
-  };
+  home.packages =
+    with pkgs;
+    [
+      helix
+      wget
+      curl
+      git
+    ]
+    ++ (lib.optionals (user.packages != null) user.packages);
   programs.git = {
     enable = true;
-    userName = cfg.opt.git.name;
-    userEmail = cfg.opt.git.mail;
+    userName = user.git.name;
+    userEmail = user.git.mail;
   };
 }
