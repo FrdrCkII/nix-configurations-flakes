@@ -70,7 +70,7 @@
 
     # 我的NUR软件包
     FrdrCkII = {
-      url = "path:nix-pkgs";
+      url = "path:./nix-pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

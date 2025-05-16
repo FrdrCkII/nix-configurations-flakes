@@ -85,7 +85,6 @@ rec {
       (writeShellScriptBin "qemu-system-x86_64-uefi" ''
         qemu-system-x86_64 -bios ${OVMF.fd}/FV/OVMF.fd "$@"
       '')
-      wineWowPackages.waylandFull
     ];
     modules =
       map custom-lib.relativeToRoot [
@@ -143,6 +142,8 @@ rec {
         microsoft-edge
         vscode
         limo
+        wineWowPackages.stagingFull
+        kdePackages.dolphin
       ];
       modules = map custom-lib.relativeToRoot [
         "nix-mod/nixos-home-core/gtkqt.nix"

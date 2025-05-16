@@ -31,9 +31,9 @@
       # https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=ananicy
       capSysNice = false;
       # 建议参数
-      # -W 1920 -H 1080 -r 60 -w 1920 -h 1080 -f --force-grab-cursor --backend sdl --
+      # -W 1920 -H 1080 -r 60 -w 1920 -h 1080 -f --force-grab-cursor --backend sdl --mangoapp --
       # fsr
-      # -W 1920 -H 1080 -r 60 -w 1280 -h 720 -F fsr -f --force-grab-cursor --backend sdl --
+      # -W 1920 -H 1080 -r 60 -w 1280 -h 720 -F fsr -f --force-grab-cursor --backend sdl --mangoapp --
     };
     # https://wiki.archlinuxcn.org/wiki/GameMode
     # https://wiki.nixos.org/wiki/GameMode
@@ -55,7 +55,6 @@
       enable = true;
       package = pkgs.steam.override {
         extraEnv = {
-          MANGOHUD = true;
           SDL_VIDEODRIVER = "wayland,x11";
         };
         extraPkgs =

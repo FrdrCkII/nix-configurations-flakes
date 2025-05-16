@@ -5,6 +5,7 @@
 { ... }:
 
 {
+  programs.clash-verge.enable = true;
   programs.firefox.enable = true;
   security.pki.certificateFiles = [
     /home/fdk/_down/Steamcommunity_302/steamcommunityCA.pem
@@ -542,6 +543,15 @@
     127.0.0.1 assets2.xboxlive.com #S302
     127.0.0.1 xvcf1.xboxlive.com #S302
     127.0.0.1 xvcf2.xboxlive.com #S302
+
+    172.64.145.202 nexusmod.com
+    172.64.145.202 www.nexusmod.com
+    172.64.145.202 next.nexusmod.com
+    172.64.145.202 global.nexusmod.com
+    172.64.145.202 search.nexusmod.com
+    172.64.145.202 file-metadata.nexusmod.com
+    172.64.145.202 *.nexusmod.com
+    89.187.185.168 file.nexus-cdn.com
   '';
   # systemd.services.steamcommunity_302 = {
   #   description = "Steamcommunity_302";
