@@ -76,10 +76,7 @@ rec {
     };
     packages = with packages.pkgs; [
       toybox
-      btrfs-assistant
-      fastfetch
       just
-      btop
       lynis
       qemu
       (writeShellScriptBin "qemu-system-x86_64-uefi" ''
@@ -108,6 +105,7 @@ rec {
         "nix-mod/nixos-system-programs/steam.nix"
 
         "nix-mod/nixos-system-desktop/niri.nix"
+        "nix-mod/nixos-system-desktop/kde.nix"
 
         "nix-mod/nixos-system-dev/rust.nix"
       ]
@@ -135,14 +133,14 @@ rec {
         qq
         wechat-uos
         ffmpeg
+        fastfetch
+        btop
         nssTools
         p7zip-rar
         libreoffice
         gimp3-with-plugins
-        microsoft-edge
         vscode
         limo
-        wineWowPackages.stagingFull
         kdePackages.dolphin
       ];
       modules = map custom-lib.relativeToRoot [

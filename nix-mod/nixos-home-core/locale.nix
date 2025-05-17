@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   home.language = {
     base = "zh_CN.UTF-8";
@@ -24,17 +24,7 @@
       wqy_zenhei
       arphic-ukai
       arphic-uming
-
-      # nerdfonts
-      # 可以单独安装特定的包
-      # 请注意不同版本安装方法也不同 https://wiki.nixos.org/wiki/Fonts#Installing_specific_nerdfonts
-      # 列表 https://github.com/NixOS/nixpkgs/blob/nixos-unstable-small/pkgs/data/fonts/nerd-fonts/manifests/fonts.json
-      # nerd-fonts.symbols-only
-      # nerd-fonts.fira-code
-      # nerd-fonts.jetbrains-mono
-      # nerd-fonts.iosevka
     ]
-    # 安装全部nerdfonts
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   fonts.fontconfig.enable = true;
   fonts.fontconfig.defaultFonts = {
@@ -54,5 +44,104 @@
       "Noto Color Emoji"
     ];
     emoji = [ "Noto Color Emoji" ];
+  };
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      waylandFrontend = true;
+      addons = with pkgs; [ fcitx5-rime ];
+      settings = {
+        globalOptions = {
+          Hotkey = {
+            EnumerateWithTriggerKeys = "True";
+            EnumerateSkipFirst = "False";
+            ModifierOnlyKeyTimeout = "250";
+          };
+          "Hotkey/TriggerKeys" = {
+            "0" = "Control+Tab";
+          };
+
+          "Hotkey/AltTriggerKeys" = {
+            "0" = "Shift_L";
+          };
+
+          "Hotkey/EnumerateGroupForwardKeys" = {
+            "0" = "Super+space";
+          };
+
+          "Hotkey/EnumerateGroupBackwardKeys" = {
+            "0" = "Shift+Super+space";
+          };
+
+          "Hotkey/ActivateKeys" = {
+            "0" = "Hangul_Hanja";
+
+          };
+          "Hotkey/DeactivateKeys" = {
+            "0" = "Hangul_Romaja";
+          };
+
+          "Hotkey/PrevPage" = {
+            "0" = "Up";
+          };
+
+          "Hotkey/NextPage" = {
+            "0" = "Down";
+          };
+
+          "Hotkey/PrevCandidate" = {
+            "0" = "Shift+Tab";
+          };
+
+          "Hotkey/NextCandidate" = {
+            "0" = "Tab";
+          };
+
+          "Hotkey/TogglePreedit" = {
+            "0" = "Control+Alt+P";
+          };
+
+          Behavior = {
+            # Active By Default
+            ActiveByDefault = "False";
+            # Reset state on Focus In
+            resetStateWhenFocusIn = "No";
+            # Share Input State
+            ShareInputState = "No";
+            # Show preedit in application
+            PreeditEnabledByDefault = "True";
+            # Show Input Method Information when switch input method
+            ShowInputMethodInformation = "True";
+            # Show Input Method Information when changing focus
+            showInputMethodInformationWhenFocusIn = "False";
+            # Show compact input method information
+            CompactInputMethodInformation = "True";
+            # Show first input method information
+            ShowFirstInputMethodInformation = "True";
+            # Default page size
+            DefaultPageSize = 5;
+            # Override Xkb Option
+            OverrideXkbOption = "False";
+            # Preload input method to be used by default
+            PreloadInputMethod = "True";
+            # Allow input method in the password field
+            AllowInputMethodForPassword = "False";
+            # Show preedit text when typing password
+            ShowPreeditForPassword = "False";
+            # Interval of saving user data in minutes
+            AutoSavePeriod = 30;
+          };
+        };
+        addons = {
+          classicui.globalSection = {
+            PreferTextIcon = lib.mkDefault "True";
+            Theme = lib.mkDefault "default-dark";
+            UseDarkTheme = lib.mkDefault "False";
+            UseAccentColor = lib.mkDefault "False";
+          };
+        };
+      };
+    };
   };
 }

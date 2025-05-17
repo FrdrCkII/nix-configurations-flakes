@@ -9,8 +9,13 @@
         layer = "top";
         position = "top";
         height = 0;
-        modules-left = [ ];
-        modules-center = [ "niri/window" ];
+        modules-left = [
+          "sway/workspaces"
+        ];
+        modules-center = [
+          "niri/window"
+          "sway/window"
+        ];
         modules-right = [
           "tray"
           "pulseaudio"
@@ -18,6 +23,11 @@
           "clock"
         ];
         "niri/workspaces" = {
+          "disable-scroll" = true;
+          "all-outputs" = false;
+          "format" = "<span color='#9f9fcf'>[{value}]</span>";
+        };
+        "sway/workspaces" = {
           "disable-scroll" = true;
           "all-outputs" = false;
           "format" = "<span color='#9f9fcf'>[{value}]</span>";

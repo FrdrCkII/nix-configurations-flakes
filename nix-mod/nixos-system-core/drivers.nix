@@ -32,29 +32,24 @@ lib.mkMerge [
     };
   }
 
-  # https://wiki.nixos.org/wiki/AMD_GPU
+  # https://nixos.wiki/wiki/AMD_GPU
   # https://wiki.archlinuxcn.org/wiki/AMDGPU
   (lib.mkIf cfg.nos.drivers.amd {
-    # Vulkan
-    environment.variables.AMD_VULKAN_ICD = "RADV";
-    hardware = {
-      graphics = {
-        extraPackages = with pkgs; [
-          mesa
-          amdvlk
-        ];
-        extraPackages32 = with pkgs; [
-          driversi686Linux.mesa
-          driversi686Linux.amdvlk
-        ];
-      };
-      amdgpu.amdvlk = {
-        enable = true;
-        support32Bit.enable = true;
-      };
-    };
     boot.initrd.kernelModules = [ "amdgpu" ];
     services.xserver.videoDrivers = [ "amdgpu" ];
+    # Vulkan
+    environment.variables = {
+      AMD_VULKAN_ICD = "RADV";
+      VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+    };
+    hardware.amdgpu.amdvlk = {
+      enable = true;
+      support32Bit.enable = true;
+    };
+
+    systemd.tmpfiles.rules = [
+      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    ];
 
     # LACT
     environment.systemPackages = with pkgs; [
