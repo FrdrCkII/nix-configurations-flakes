@@ -1,5 +1,14 @@
-{ pkgs, user, ... }:
 {
+  pkgs,
+  cfg,
+  user,
+  ...
+}:
+{
+  imports = map cfg.lib.relativeToRoot [
+    "nix-mod/nixos-home-programs/shell/bash.nix"
+    "nix-mod/nixos-home-programs/shell/cli/git.nix"
+  ];
   home.packages =
     with pkgs;
     [
@@ -9,9 +18,4 @@
       git
     ]
     ++ (lib.optionals (user.packages != null) user.packages);
-  programs.git = {
-    enable = true;
-    userName = user.git.name;
-    userEmail = user.git.mail;
-  };
 }

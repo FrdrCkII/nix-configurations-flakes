@@ -15,11 +15,9 @@
     acc: user:
     {
       ${user.name} = {
-        home.packages = [ pkgs.kdePackages.karousel ];
-        home.file.".local/share/kwin/scripts/karousel" = {
-          source = "${pkgs.kdePackages.karousel}/share/kwin/scripts/karousel";
-          recursive = true;
-        };
+        imports = map cfg.lib.relativeToRoot [
+          "nix-mod/nixos-home-programs/desktop/kde.nix"
+        ];
       };
     }
     // acc

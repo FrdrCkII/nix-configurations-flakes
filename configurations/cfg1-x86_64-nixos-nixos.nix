@@ -75,7 +75,6 @@ rec {
       efi-mount-point = "/boot/efi";
     };
     packages = with packages.pkgs; [
-      toybox
       just
       lynis
       qemu
@@ -89,25 +88,18 @@ rec {
         "nix-mod/${system.config}/hardware-configuration.nix"
         "nix-mod/${system.config}/btrfs.nix"
 
-        "nix-mod/nixos-system-core/boot.nix"
-        "nix-mod/nixos-system-core/drivers.nix"
-        "nix-mod/nixos-system-core/greetd.nix"
-        "nix-mod/nixos-system-core/locale.nix"
-        "nix-mod/nixos-system-core/nix-ld.nix"
-        "nix-mod/nixos-system-core/nixpkgs.nix"
-        "nix-mod/nixos-system-core/stylix.nix"
-        "nix-mod/nixos-system-core/security.nix"
         "nix-mod/nixos-system-core/system.nix"
-        "nix-mod/nixos-system-core/users.nix"
+        "nix-mod/nixos-system-core/security.nix"
         # "nix-mod/nixos-system-core/selinux.nix"
 
         "nix-mod/nixos-system-programs/shell.nix"
+        "nix-mod/nixos-system-programs/desktop/niri.nix"
+        "nix-mod/nixos-system-programs/desktop/kde.nix"
+        "nix-mod/nixos-system-programs/develop/rust.nix"
+        "nix-mod/nixos-system-programs/greetd.nix"
+        "nix-mod/nixos-system-programs/nix-ld.nix"
         "nix-mod/nixos-system-programs/steam.nix"
-
-        "nix-mod/nixos-system-desktop/niri.nix"
-        "nix-mod/nixos-system-desktop/kde.nix"
-
-        "nix-mod/nixos-system-dev/rust.nix"
+        "nix-mod/nixos-system-programs/stylix.nix"
       ]
       ++ [ inputs.stylix.nixosModules.stylix ];
   };
@@ -130,18 +122,19 @@ rec {
         mail = "c2h5oc2h4@outlook.com";
       };
       packages = with packages.pkgs; [
-        qq
-        wechat-uos
-        ffmpeg
+        busybox
         fastfetch
-        btop
-        nssTools
+        dust
+        ffmpeg
         p7zip-rar
+        nssTools
         libreoffice
         gimp3-with-plugins
+        kdePackages.dolphin
+        wechat-uos
+        qq
         vscode
         limo
-        kdePackages.dolphin
       ];
       modules = map custom-lib.relativeToRoot [
         "nix-mod/nixos-home-core/gtkqt.nix"
@@ -149,12 +142,15 @@ rec {
         "nix-mod/nixos-home-core/system.nix"
         "nix-mod/nixos-home-core/xdg.nix"
 
-        "nix-mod/nixos-home-programs/shell.nix"
+        "nix-mod/nixos-home-programs/shell/zsh.nix"
+        "nix-mod/nixos-home-programs/shell/cli/bottom.nix"
+        "nix-mod/nixos-home-programs/shell/cli/eza.nix"
+        "nix-mod/nixos-home-programs/shell/cli/fastfetch.nix"
+        "nix-mod/nixos-home-programs/shell/cli/lazygit.nix"
+        "nix-mod/nixos-home-programs/shell/cli/yazi.nix"
         "nix-mod/nixos-home-programs/ghostty.nix"
         "nix-mod/nixos-home-programs/aria2.nix"
-        "nix-mod/nixos-home-programs/fastfetch.nix"
         "nix-mod/nixos-home-programs/helix.nix"
-        "nix-mod/nixos-home-programs/yazi.nix"
         "nix-mod/nixos-home-programs/zed.nix"
       ];
     }

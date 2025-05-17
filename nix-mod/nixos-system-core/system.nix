@@ -5,6 +5,14 @@
   ...
 }:
 {
+  imports = map cfg.lib.relativeToRoot [
+    "nix-mod/nixos-system-core/system/boot.nix"
+    "nix-mod/nixos-system-core/system/drivers.nix"
+    "nix-mod/nixos-system-core/system/locale.nix"
+    "nix-mod/nixos-system-core/system/nixpkgs.nix"
+    "nix-mod/nixos-system-core/system/users.nix"
+    "nix-mod/nixos-system-programs/shell.nix"
+  ];
   environment.systemPackages =
     with pkgs;
     [
